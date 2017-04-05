@@ -9,6 +9,9 @@ public interface MainContract {
 
     interface  IMainPresenter extends BaseContract.IBasePresenter{
 
+        void initTcpClient();
+
+        void connTcpServer();
     }
 
     interface  IMain extends BaseContract.IBase {

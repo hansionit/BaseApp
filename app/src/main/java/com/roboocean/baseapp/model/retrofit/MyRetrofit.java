@@ -7,6 +7,8 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.google.gson.Gson;
 import com.roboocean.baseapp.App;
 import com.roboocean.baseapp.Constants;
+import com.roboocean.baseapp.model.retrofit.cookie.AddCookiesInterceptor;
+import com.roboocean.baseapp.model.retrofit.cookie.ReceivedCookiesInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +46,11 @@ public class MyRetrofit {
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .cookieJar(cookieJar)
+
+                //okhttp的cookie持久化
+                .addInterceptor(new ReceivedCookiesInterceptor(App.getAppContext()))
+                .addInterceptor(new AddCookiesInterceptor(App.getAppContext()))
+
                 .build();
 
 

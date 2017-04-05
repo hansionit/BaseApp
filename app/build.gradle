@@ -24,42 +24,33 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-
     //butterknife
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
-
     //Rx
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
-
     //retrofit2
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0'
-
     //json解析
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     compile 'com.google.code.gson:gson:2.7'
-
     //xml解析
     compile('com.squareup.retrofit2:converter-simplexml:2.0.1') {
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
-
     //okhttp打印log
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
-
-    //okhttp的cookie持久化
-    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
-
     //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/h_socket.jar')
 }
