@@ -1,9 +1,5 @@
 package com.roboocean.baseapp.model.retrofit;
 
-import com.franmontiel.persistentcookiejar.ClearableCookieJar;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.google.gson.Gson;
 import com.roboocean.baseapp.App;
 import com.roboocean.baseapp.Constants;
@@ -35,11 +31,9 @@ public class MyRetrofit {
     private static final int DEFAULT_TIMEOUT = 3;
     private Retrofit retrofit;
     private ApiService apiService;
-    private final ClearableCookieJar cookieJar;
 
     //构造方法私有
     private MyRetrofit() {
-        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getAppContext()));
         //手动创建一个OkHttpClient并设置超时时间
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -80,11 +74,6 @@ public class MyRetrofit {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
-    }
-
-    public void clearCookieAndSession() {
-        cookieJar.clear();
-        cookieJar.clearSession();
     }
 
 

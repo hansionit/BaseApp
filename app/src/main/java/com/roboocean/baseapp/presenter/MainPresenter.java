@@ -1,12 +1,12 @@
 package com.roboocean.baseapp.presenter;
 
+import com.hansion.h_socket.common.bean.AddressInfo;
+import com.hansion.h_socket.common.bean.SocketMessage;
 import com.hansion.h_socket.tcp.HTcpClient;
-import com.hansion.h_socket.tcp.bean.AddressInfo;
-import com.hansion.h_socket.tcp.bean.SocketMessage;
-import com.hansion.h_socket.tcp.conn.ConnConfig;
+import com.hansion.h_socket.tcp.conn.TcpClientConfig;
 import com.hansion.h_socket.tcp.data.SpecifiedStickPackageUtil;
 import com.hansion.h_socket.tcp.data.StickPackageUtil;
-import com.hansion.h_socket.tcp.listener.SocketListener;
+import com.hansion.h_socket.tcp.listener.TcpClientListener;
 import com.roboocean.baseapp.contract.MainContract;
 import com.roboocean.baseapp.ui.MainActivity;
 import com.roboocean.baseapp.utils.HLogUtil;
@@ -19,7 +19,7 @@ import static com.roboocean.baseapp.Constants.PORT;
  * Author: Hansion
  * Time: 2017/2/3 11:22
  */
-public class MainPresenter extends BasePresenter<MainActivity> implements MainContract.IMainPresenter, SocketListener {
+public class MainPresenter extends BasePresenter<MainActivity> implements MainContract.IMainPresenter, TcpClientListener {
 
 
     private StickPackageUtil stickHelper;
@@ -40,7 +40,7 @@ public class MainPresenter extends BasePresenter<MainActivity> implements MainCo
 
     @Override
     public void connTcpServer() {
-        hTcpClient.config(new ConnConfig.Builder()
+        hTcpClient.config(new TcpClientConfig.Builder()
 //                .setStickPackageHelper(stickHelper)//粘包
 //                    .setIsReconnect(true)   //自动重连
                 .create());
