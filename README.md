@@ -8,7 +8,9 @@
 
 闪屏页倒计时进入
 
+TabLayout的使用示例，以便快速开发
 
+包含多种常用工具类：文件、日志、吐司、网络、UI、时间、市场、校验等等
 
 A sample Android app using the MVP architecture.
 
