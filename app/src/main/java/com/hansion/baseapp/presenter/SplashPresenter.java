@@ -14,10 +14,10 @@ public class SplashPresenter extends BasePresenter<SplashActivity> implements Sp
     @Override
     public void isAppFirstRun() {
         boolean isFirstRun = SharedPrefsUtil.getValue(getView(), "isFirstRun","isFirstRun", true);
-        if (isFirstRun) {
-            SharedPrefsUtil.putValue(getView(),"isFirstRun", "isFirstRun", false);
+        if (!isFirstRun) {
             getView().goHome();
         } else {
+            SharedPrefsUtil.putValue(getView(),"isFirstRun", "isFirstRun", false);
             getView().goGuide();
         }
     }

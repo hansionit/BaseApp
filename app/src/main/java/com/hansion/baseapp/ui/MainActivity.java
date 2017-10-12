@@ -1,8 +1,12 @@
 package com.hansion.baseapp.ui;
 
+import android.view.View;
+
 import com.hansion.baseapp.R;
 import com.hansion.baseapp.contract.MainContract;
 import com.hansion.baseapp.presenter.MainPresenter;
+
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<MainActivity, MainPresenter> implements MainContract.IMain {
 
@@ -28,5 +32,15 @@ public class MainActivity extends BaseActivity<MainActivity, MainPresenter> impl
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter();
+    }
+
+
+    @OnClick(R.id.mGoTablayoutActivity)
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.mGoTablayoutActivity:
+                switchTo(this, TabLayoutActivity.class, false);
+                break;
+        }
     }
 }
