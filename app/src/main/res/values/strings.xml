@@ -2,5 +2,6 @@
     <string name="app_name">BaseApp</string>
 
     <string name="timer_seconds">跳过&#160;%1$ds</string>
+    <string name="press_again_quit">再按一次退出程序</string>
 
 </resources>

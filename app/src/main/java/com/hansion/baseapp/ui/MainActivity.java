@@ -1,6 +1,8 @@
 package com.hansion.baseapp.ui;
 
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hansion.baseapp.R;
 import com.hansion.baseapp.contract.MainContract;
@@ -42,5 +44,23 @@ public class MainActivity extends BaseActivity<MainActivity, MainPresenter> impl
                 switchTo(this, TabLayoutActivity.class, false);
                 break;
         }
+    }
+
+
+    //用于判定双击退出APP的时间
+    private long lastBackPressedTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                long pressTime = System.currentTimeMillis();
+                if (pressTime - lastBackPressedTime < 2000) {
+                    mPresenter.exitApp();
+                    return true;
+                }
+                Toast.makeText(this, R.string.press_again_quit, Toast.LENGTH_SHORT).show();
+                lastBackPressedTime = pressTime;
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

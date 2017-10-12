@@ -8,6 +8,8 @@ package com.hansion.baseapp.contract;
 public interface MainContract {
 
     interface  IMainPresenter extends BaseContract.IBasePresenter{
+
+        void exitApp();
     }
 
     interface  IMain extends BaseContract.IBase {
