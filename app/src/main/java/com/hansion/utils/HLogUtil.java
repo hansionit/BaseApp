@@ -1,6 +1,9 @@
-package com.hansion.baseapp.utils;
+package com.hansion.utils;
 
 import android.util.Log;
+
+import com.hansion.baseapp.App;
+
 
 /**
  * Description：Log工具类
@@ -9,8 +12,7 @@ import android.util.Log;
  */
 public class HLogUtil {
 
-    //TODO 上线前更改
-    private static boolean isDebug = true;
+    private static boolean isDebug = App.isDebug;
     static String className;//类名
     static String methodName;//方法名
     static int lineNumber;//行数

@@ -1,4 +1,4 @@
-package com.hansion.baseapp.utils;
+package com.hansion.utils;
 
 import android.content.Context;
 import android.widget.ImageView;

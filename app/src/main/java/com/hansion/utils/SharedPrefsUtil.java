@@ -1,4 +1,4 @@
-package com.hansion.baseapp.utils;
+package com.hansion.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,7 +22,7 @@ public class SharedPrefsUtil {
                                 int value) {
         SharedPreferences.Editor sp = getEditor(context, name);
         sp.putInt(key, value);
-        sp.commit();
+        sp.apply();
     }
 
     /**
@@ -37,7 +37,7 @@ public class SharedPrefsUtil {
                                 boolean value) {
         SharedPreferences.Editor sp = getEditor(context, name);
         sp.putBoolean(key, value);
-        sp.commit();
+        sp.apply();
     }
 
     /**
@@ -52,7 +52,7 @@ public class SharedPrefsUtil {
                                 String value) {
         SharedPreferences.Editor sp = getEditor(context, name);
         sp.putString(key, value);
-        sp.commit();
+        sp.apply();
     }
 
     /**
@@ -67,7 +67,7 @@ public class SharedPrefsUtil {
                                 float value) {
         SharedPreferences.Editor sp = getEditor(context, name);
         sp.putFloat(key, value);
-        sp.commit();
+        sp.apply();
     }
 
     /**
@@ -82,7 +82,7 @@ public class SharedPrefsUtil {
                                 long value) {
         SharedPreferences.Editor sp = getEditor(context, name);
         sp.putLong(key, value);
-        sp.commit();
+        sp.apply();
     }
 
     /**

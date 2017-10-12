@@ -7,6 +7,11 @@ import com.hansion.baseapp.presenter.MainPresenter;
 public class MainActivity extends BaseActivity<MainActivity, MainPresenter> implements MainContract.IMain {
 
     @Override
+    public boolean isActivitySlideBack() {
+        return false;
+    }
+
+    @Override
     protected int initContentView() {
         return R.layout.activity_main;
     }

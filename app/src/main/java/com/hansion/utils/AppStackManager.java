@@ -1,7 +1,12 @@
-package com.hansion.baseapp.utils;
+package com.hansion.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.util.Log;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -31,7 +36,7 @@ public class AppStackManager {
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }
@@ -62,6 +67,21 @@ public class AppStackManager {
     /**
      * 结束指定的Activity
      */
+    public boolean isActivityExis(Class<?> cls) {
+        Iterator<Activity> it = activityStack.iterator();
+        while (it.hasNext()) {
+            Activity activity  = it.next();
+            if (activity.getClass().equals(cls)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 结束指定的Activity
+     */
     public void finishActivity(Activity activity) {
         if (activity != null) {
             activityStack.remove(activity);
@@ -81,9 +101,14 @@ public class AppStackManager {
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-        for (Activity activity : activityStack) {
+        Iterator<Activity> it = activityStack.iterator();
+        while (it.hasNext()) {
+            Activity activity  = it.next();
             if (activity.getClass().equals(cls)) {
-                finishActivity(activity);
+                activity.finish();
+                it.remove();
+                activity = null;
+                break;
             }
         }
     }
@@ -98,5 +123,24 @@ public class AppStackManager {
             }
         }
         activityStack.clear();
+    }
+
+
+
+    public static boolean isBackground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(context.getPackageName())) {
+                if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                    Log.d("后台", appProcess.processName);
+                    return true;
+                }else{
+                    Log.d("前台", appProcess.processName);
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

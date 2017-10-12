@@ -8,6 +8,11 @@ public class GuideActivity extends BaseActivity<GuideActivity, GuidePresenter> i
 
 
     @Override
+    public boolean isActivitySlideBack() {
+        return false;
+    }
+
+    @Override
     protected int initContentView() {
         return R.layout.activity_guide;
     }

@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.hansion.baseapp.contract.BaseContract;
 import com.hansion.baseapp.presenter.BasePresenter;
-import com.hansion.baseapp.utils.HLogUtil;
-import com.hansion.baseapp.utils.MyToast;
+import com.hansion.utils.HLogUtil;
+import com.hansion.utils.MyToast;
 
 import butterknife.ButterKnife;
 
@@ -113,6 +113,7 @@ public abstract class BaseFragment<V extends BaseContract.IBase, P extends BaseP
     @Override
     public void onDestroy() {
         super.onDestroy();
+        hideProgressDialog();
         HLogUtil.i(mClassName + " ----------> onDestroy");
     }
 

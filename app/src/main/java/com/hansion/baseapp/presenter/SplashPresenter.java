@@ -2,7 +2,7 @@ package com.hansion.baseapp.presenter;
 
 import com.hansion.baseapp.contract.SplashContract;
 import com.hansion.baseapp.ui.SplashActivity;
-import com.hansion.baseapp.utils.SharedPrefsUtil;
+import com.hansion.utils.SharedPrefsUtil;
 
 /**
  * Description：

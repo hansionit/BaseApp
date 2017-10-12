@@ -23,6 +23,11 @@ public class SplashActivity extends BaseActivity<SplashActivity, SplashPresenter
 
 
     @Override
+    public boolean isActivitySlideBack() {
+        return false;
+    }
+
+    @Override
     protected int initContentView() {
         return R.layout.activity_splash;
     }

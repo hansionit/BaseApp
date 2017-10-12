@@ -1,4 +1,4 @@
-package com.hansion.baseapp.utils;
+package com.hansion.utils;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -14,9 +14,8 @@ import com.hansion.baseapp.App;
  */
 public class MyToast {
 
-    //TODO 是否在Debug模式   上线前需要更改为false
-    public static boolean LOG_DEBUG = true;
-    private static Toast mCustomToast;
+    //是否在Debug模式
+    public static boolean LOG_DEBUG = App.isDebug;
     private static Toast mToast;
 
     //短时间吐司
@@ -25,7 +24,6 @@ public class MyToast {
     }
 
 
-    //TODO 上线前需将用此方法展示的Toast更改为 : 用strings.xml和上面的方法配合显示
     //短时间吐司
     public static void show(String text) {
         show(text, Toast.LENGTH_SHORT);
@@ -41,10 +39,6 @@ public class MyToast {
     public static void show(@NonNull final String text, final int duration) {
 
         if (mToast == null) {
-           if (App.getAppContext() == null) {
-                HLogUtil.e("AppContext是null");
-            }
-
             mToast = Toast.makeText(App.getAppContext(), text, duration);
         } else {
             mToast.setText(text);
@@ -60,7 +54,7 @@ public class MyToast {
                 show(text);
             }
         } catch (Exception e) {
-            HLogUtil.e(e.getMessage());
+
         }
     }
 
@@ -78,21 +72,4 @@ public class MyToast {
             }
         });
     }
-
-
-    /**
-     * 自定义布局的Toast
-     * @param tvString
-     */
-//    public static void showToast(String tvString) {
-//        if (mCustomToast == null) {
-//            mCustomToast = new Toast(App.getAppContext());
-//        }
-//        View layout = LayoutInflater.from(App.getAppContext()).inflate(R.layout.custiom_toast, null);
-//        TextView text = (TextView) layout.findViewById(R.id.mToastText);
-//        text.setText(tvString);
-//        mCustomToast.setDuration(Toast.LENGTH_LONG);
-//        mCustomToast.setView(layout);
-//        mCustomToast.show();
-//    }
 }
