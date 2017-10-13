@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,8 +18,10 @@ import com.hansion.baseapp.presenter.BasePresenter;
 import com.hansion.utils.AppStackManager;
 import com.hansion.utils.HLogUtil;
 import com.hansion.utils.MyToast;
+import com.hansion.utils.SharedPrefsUtil;
 import com.hansion.view.slideback.SlideBackAppCompatActivity;
 
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,6 +54,8 @@ public abstract class BaseActivity<V extends BaseContract.IBase, P extends BaseP
         super.onCreate(savedInstanceState);
         //设置是否全屏，如果不全屏,设置状态栏颜色
         setScreenIsFull();
+        //设置语言
+        changeAppLanguage();
         //设置Layout
         setContentView(initContentView());
         //初始化Presenter
@@ -63,6 +70,13 @@ public abstract class BaseActivity<V extends BaseContract.IBase, P extends BaseP
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        HLogUtil.i(mClassName + "----------> onConfigurationChanged");
+        changeAppLanguage();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         HLogUtil.i(mClassName + " ----------> onStart");
@@ -71,6 +85,7 @@ public abstract class BaseActivity<V extends BaseContract.IBase, P extends BaseP
     @Override
     protected void onResume() {
         super.onResume();
+        changeAppLanguage();
         HLogUtil.i(mClassName + " ----------> onResume");
     }
 
@@ -103,6 +118,42 @@ public abstract class BaseActivity<V extends BaseContract.IBase, P extends BaseP
             String FRAGMENTS_TAG = "Android:support:fragments";
             outState.remove(FRAGMENTS_TAG);
         }
+    }
+
+    /**
+     * 设置语言
+     *
+     * @param language "zh"  "en"   "auto"
+     */
+    public void changeLanguage(String language) {
+        String value = SharedPrefsUtil.getValue(this, "language", "language", "auto");
+        if (value.equals(language)) {
+            return;
+        }
+        SharedPrefsUtil.putValue(this, "language", "language", language);
+    }
+
+
+    /**
+     * 根据配置设置语言
+     */
+    public void changeAppLanguage() {
+        String sta = SharedPrefsUtil.getValue(this, "language", "language", "auto");
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        switch (sta) {
+            case "en":
+                conf.locale = Locale.ENGLISH;
+                break;
+            case "zh":
+                conf.locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            default:
+                conf.locale = Locale.getDefault();
+                break;
+        }
+        res.updateConfiguration(conf, dm);
     }
 
 
